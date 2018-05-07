@@ -1,0 +1,16 @@
+{
+	"iOS" : [
+		{
+			"appName":"ILSermonNotesApp",
+			"appVersion":"1.0.0",
+			"appURL":"https://enenyi.github.io/ILSermonNotesApp/ILSermonNotesApp.plist"
+		}
+	],
+	"android" : [
+		{
+			"appName":"ILSermonNotesApp",
+			"appVersion":"1.0.0",
+			"appURL":"https://enenyi.github.io/ILSermonNotesApp/ILSermonNotesApp.apk"
+		}
+	]
+}
