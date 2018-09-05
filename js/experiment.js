@@ -56,8 +56,6 @@ function initExperiment() {
 		var menuDepth = cells[1].trim();
 		var menuBreadth = cells[2].trim();
 		var targetItem = cells[3].trim();
-		console.log("Cells: " + cells);
-		console.log("MenuType: " + menuType);
 		trialsData[i] = {
 			'Menu Type': menuType,
 			'Menu Depth': menuDepth,
@@ -205,8 +203,6 @@ function formatMarkingMenuData(data) {
 	// Parse through the records and create individual menu items
 	for (var i = 1; i < numRecords; i++) {
 		var items = records[i].split(',');
-		console.log("items: " + items);
-		console.log("item length: " + items.length);
 		var id = items[0].trim();
 		var label = items[2].trim();
 		menuItems[id] = {
