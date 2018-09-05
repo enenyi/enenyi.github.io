@@ -114,14 +114,12 @@ function nextTrial() {
 		var menuDepth = trialsData[currentTrial]['Menu Depth'];
 		var targetItem = trialsData[currentTrial]['Target Item'];
 
-		document.getElementById("orderNumber").innerHTML = orderNumber;
 		document.getElementById("trialNumber").innerHTML = String(currentTrial) + "/" + String(numTrials);
 		document.getElementById("menuType").innerHTML = menuType;
 		document.getElementById("menuDepth").innerHTML = menuDepth;
 		document.getElementById("menuBreadth").innerHTML = menuBreadth;
 		document.getElementById("targetItem").innerHTML = targetItem;
 		document.getElementById("selectedItem").innerHTML = "&nbsp;";
-		// Set IV3 state over here
 
 		tracker.newTrial();
 		tracker.trial = currentTrial;
