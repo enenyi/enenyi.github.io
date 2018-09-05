@@ -1,7 +1,6 @@
 'use strict';
 
 // Location of data files
-const trialsFile = ""
 const menuL1B2File = "./data/menu_depth_1_breadth_2.csv"
 const menuL2B2File = "./data/menu_depth_2_breadth_2.csv"
 const menuL3B2File = "./data/menu_depth_3_breadth_2.csv"
@@ -15,6 +14,7 @@ const menuL3B4File = "./data/menu_depth_3_breadth_4.csv"
 // Global variables
 var menu;
 var trialsData = [];
+var trialsFile = "";
 var numTrials = 0;
 var orderNumber = 0;
 var currentTrial = 1;
