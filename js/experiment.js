@@ -56,6 +56,8 @@ function initExperiment() {
 		var menuDepth = cells[1].trim();
 		var menuBreadth = cells[2].trim();
 		var targetItem = cells[3].trim();
+		console.log("Cells: " + cells);
+		console.log("MenuType: " + menuType);
 		trialsData[i] = {
 			'Menu Type': menuType,
 			'Menu Depth': menuDepth,
