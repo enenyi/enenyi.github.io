@@ -49,10 +49,12 @@ function initExperiment() {
 	var data = getData(trialsFile);
 
 	var records = data.split("\n");
-	console.log(records);
 	numTrials = records.length - 1;
 	for (var i = 1; i <= numTrials; i++) {
+		console.log("record row: " + records[i]);
 		var cells = records[i].split(",");
+		console.log("cells: " + cells);
+		console.log("cell length: " + cells.length);
 		var menuType = cells[0].trim();
 		var menuDepth = cells[1].trim();
 		var menuBreadth = cells[2].trim();
