@@ -44,7 +44,7 @@ function getData(relativePath) {
 function initExperiment() {
 
 	// Get Trails
-	orderNumber = Math.floor(Math.random() % 6) + 1;
+	orderNumber = parseInt(Math.floor(Math.random() * 6) + 1);
 	console.log("Order Number: " + String(orderNumber));
 	trialsFile = "./data/experiments_order" + String(orderNumber) + ".csv";
 	console.log("Trials File: " + trialsFile);
