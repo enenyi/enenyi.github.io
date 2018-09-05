@@ -118,7 +118,7 @@ function nextTrial() {
 		document.getElementById("trialNumber").innerHTML = String(currentTrial) + "/" + String(numTrials);
 		document.getElementById("menuType").innerHTML = menuType;
 		document.getElementById("menuDepth").innerHTML = menuDepth;
-		document.getElementById("menuBreadth").innerHTML = 4;
+		document.getElementById("menuBreadth").innerHTML = menuBreadth;
 		document.getElementById("targetItem").innerHTML = targetItem;
 		document.getElementById("selectedItem").innerHTML = "&nbsp;";
 		// Set IV3 state over here
@@ -205,6 +205,8 @@ function formatMarkingMenuData(data) {
 	// Parse through the records and create individual menu items
 	for (var i = 1; i < numRecords; i++) {
 		var items = records[i].split(',');
+		console.log("items: " + items);
+		console.log("item length: " + items.length);
 		var id = items[0].trim();
 		var label = items[2].trim();
 		menuItems[id] = {
