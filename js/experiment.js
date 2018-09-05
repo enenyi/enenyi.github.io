@@ -48,7 +48,7 @@ function initExperiment() {
 	trialsFile = "./data/experimentsOrder" + String(orderNumber) + ".csv";
 	var data = getData(trialsFile);
 
-	var records = data.split("\n");
+	var records = data.split("\r\n");
 	numTrials = records.length - 1;
 	for (var i = 1; i <= numTrials; i++) {
 		var cells = records[i];
