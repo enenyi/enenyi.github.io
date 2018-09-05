@@ -45,7 +45,9 @@ function initExperiment() {
 
 	// Get Trails
 	orderNumber = (Math.random() % 6) + 1;
+	console.log("Order Number: " + String(orderNumber));
 	trialsFile = "./data/experiments_order" + String(orderNumber) + ".csv";
+	console.log("Trials File: " + trialsFile);
 	var data = getData(trialsFile);
 
 	var records = data.split("\n");
@@ -54,7 +56,7 @@ function initExperiment() {
 		var cells = records[i].split(",");
 		var menuType = cells[0].trim();
 		var menuDepth = cells[1].trim();
-		var menuDepth = cells[2].trim();
+		var menuBreadth = cells[2].trim();
 		var targetItem = cells[3].trim();
 		trialsData[i] = {
 			'Menu Type': menuType,
