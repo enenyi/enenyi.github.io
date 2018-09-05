@@ -9,12 +9,13 @@ class ExperimentTracker {
 		this.attempt = null;
 		this.menuType = null;
 		this.menuDepth = null;
+		this.menuBreadth = null;
 		this.targetItem = null;
 		this.selectedItem = null;
 		this.startTime = null;
 		this.endTime = null;
 	}
-	
+
 	resetTimers(){
 		this.startTime = null;
 		this.endTime = null;
@@ -30,9 +31,9 @@ class ExperimentTracker {
 	}
 
 	stopTimer() {
-		
+
 		this.endTime = Date.now();
-		this.trials.push([this.trial, this.attempt, this.menuType, this.menuDepth, this.targetItem, this.selectedItem, this.startTime, this.endTime])
+		this.trials.push([this.trial, this.attempt, this.menuType, this.menuDepth, this.menuBreadth, this.targetItem, this.selectedItem, this.startTime, this.endTime])
 		this.resetTimers();
 		this.attempt++;
 

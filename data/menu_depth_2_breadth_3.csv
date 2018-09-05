@@ -1,0 +1,13 @@
+Id,Parent,Label
+1,0,Animals
+2,0,Food
+3,0,Clothing
+4,1,Mammals
+5,1,Reptiles
+6,1,Fish
+7,2,Fruit
+8,2,Vegetables
+9,2,Meat
+10,3,Tops
+11,3,Bottoms
+12,3,Shoes

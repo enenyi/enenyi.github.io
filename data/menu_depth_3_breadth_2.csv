@@ -1,0 +1,15 @@
+Id,Parent,Label
+1,0,Animals
+2,0,Food
+3,1,Mammals
+4,1,Reptiles
+5,2,Fruit
+6,2,Vegetables
+7,3,Cats
+8,3,Dogs
+9,4,Hamsters
+10,4,Fox
+11,5,Orange
+12,5,Pineapple
+13,6,Potatoes
+14,6,Onion

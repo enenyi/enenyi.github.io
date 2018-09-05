@@ -1,15 +1,22 @@
 'use strict';
 
 // Location of data files
-const trialsFile = "./data/experiments.csv"
-const menuL1File = "./data/menu_depth_1.csv"
-const menuL2File = "./data/menu_depth_2.csv"
-const menuL3File = "./data/menu_depth_3.csv"
+const trialsFile = ""
+const menuL1B2File = "./data/menu_depth_1_breadth_2.csv"
+const menuL2B2File = "./data/menu_depth_2_breadth_2.csv"
+const menuL3B2File = "./data/menu_depth_3_breadth_2.csv"
+const menuL1B3File = "./data/menu_depth_1_breadth_3.csv"
+const menuL2B3File = "./data/menu_depth_2_breadth_3.csv"
+const menuL3B3File = "./data/menu_depth_3_breadth_3.csv"
+const menuL1B4File = "./data/menu_depth_1_breadth_4.csv"
+const menuL2B4File = "./data/menu_depth_2_breadth_4.csv"
+const menuL3B4File = "./data/menu_depth_3_breadth_4.csv"
 
 // Global variables
 var menu;
 var trialsData = [];
-var numTrials = 3;
+var numTrials = 0;
+var orderNumber = 0;
 var currentTrial = 1;
 var markingMenuL1 = [];
 var markingMenuL2 = [];
@@ -21,8 +28,6 @@ var radialMenuL3 = [];
 var tracker = new ExperimentTracker();
 var markingMenuSubscription = null;
 var radialMenuSvg = null;
-
-
 
 
 
@@ -39,6 +44,8 @@ function getData(relativePath) {
 function initExperiment() {
 
 	// Get Trails
+	orderNumber = (Math.random() % 6) + 1;
+	trialsFile = "./data/experiments_order" + String(orderNumber) + ".csv";
 	var data = getData(trialsFile);
 
 	var records = data.split("\n");
@@ -47,26 +54,15 @@ function initExperiment() {
 		var cells = records[i].split(",");
 		var menuType = cells[0].trim();
 		var menuDepth = cells[1].trim();
-		var targetItem = cells[2].trim();
+		var menuDepth = cells[2].trim();
+		var targetItem = cells[3].trim();
 		trialsData[i] = {
 			'Menu Type': menuType,
 			'Menu Depth': menuDepth,
+			'Menu Breadth': menuBreadth,
 			'Target Item': targetItem
 		};
 	}
-
-	// Get Menus
-	var menuL1Data = getData(menuL1File);
-	var menuL2Data = getData(menuL2File);
-	var menuL3Data = getData(menuL3File);
-
-	// Format CSV Menu to respective Menu structures
-	markingMenuL1 = formatMarkingMenuData(menuL1Data);
-	markingMenuL2 = formatMarkingMenuData(menuL2Data);
-	markingMenuL3 = formatMarkingMenuData(menuL3Data);
-	radialMenuL1 = formatRadialMenuData(menuL1Data);
-	radialMenuL2 = formatRadialMenuData(menuL2Data);
-	radialMenuL3 = formatRadialMenuData(menuL3Data);
 
 	//Start the first trial
 	nextTrial();
@@ -81,14 +77,44 @@ function loadNextTrial(e){
 
 // Move to next trai and record events
 function nextTrial() {
-
-
 	if (currentTrial <= numTrials) {
+		var menuBreadth = trialsData[currentTrial]['Menu Breadth'];
+
+		// Get Menus
+		var menuL1Data;
+		var menuL2Data;
+		var menuL3Data;
+
+		if(menuBreadth == 2) {
+			menuL1Data = getData(menuL1B2File);
+			menuL2Data = getData(menuL2B2File);
+			menuL3Data = getData(menuL3B2File);
+		}
+		else if(menuBreadth == 3) {
+			menuL1Data = getData(menuL1B3File);
+			menuL2Data = getData(menuL2B3File);
+			menuL3Data = getData(menuL3B3File);
+		}
+		else {
+			menuL1Data = getData(menuL1B4File);
+			menuL2Data = getData(menuL2B4File);
+			menuL3Data = getData(menuL3B4File);
+		}
+
+		// Format CSV Menu to respective Menu structures
+		markingMenuL1 = formatMarkingMenuData(menuL1Data);
+		markingMenuL2 = formatMarkingMenuData(menuL2Data);
+		markingMenuL3 = formatMarkingMenuData(menuL3Data);
+		radialMenuL1 = formatRadialMenuData(menuL1Data);
+		radialMenuL2 = formatRadialMenuData(menuL2Data);
+		radialMenuL3 = formatRadialMenuData(menuL3Data);
+
 
 		var menuType = trialsData[currentTrial]['Menu Type'];
 		var menuDepth = trialsData[currentTrial]['Menu Depth'];
 		var targetItem = trialsData[currentTrial]['Target Item'];
 
+		document.getElementById("orderNumber").innerHTML = orderNumber;
 		document.getElementById("trialNumber").innerHTML = String(currentTrial) + "/" + String(numTrials);
 		document.getElementById("menuType").innerHTML = menuType;
 		document.getElementById("menuDepth").innerHTML = menuDepth;
@@ -101,6 +127,7 @@ function nextTrial() {
 		tracker.trial = currentTrial;
 		tracker.menuType = menuType;
 		tracker.menuDepth = menuDepth;
+		tracker.menuBreadth = menuBreadth;
 		tracker.targetItem = targetItem;
 
 		if (menuType === "Marking") {

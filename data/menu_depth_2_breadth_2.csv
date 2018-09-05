@@ -1,0 +1,7 @@
+Id,Parent,Label
+1,0,Animals
+2,0,Food
+3,1,Mammals
+4,1,Reptiles
+5,2,Fruit
+6,2,Vegetables
