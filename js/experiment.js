@@ -45,12 +45,11 @@ function initExperiment() {
 
 	// Get Trails
 	orderNumber = parseInt(Math.floor(Math.random() * 6) + 1);
-	console.log("Order Number: " + String(orderNumber));
-	trialsFile = "./data/experiments_order" + String(orderNumber) + ".csv";
-	console.log("Trials File: " + trialsFile);
+	trialsFile = "./data/experimentsOrder" + String(orderNumber) + ".csv";
 	var data = getData(trialsFile);
 
 	var records = data.split("\n");
+	console.log(records);
 	numTrials = records.length - 1;
 	for (var i = 1; i <= numTrials; i++) {
 		var cells = records[i].split(",");
