@@ -52,7 +52,7 @@ function initExperiment() {
 	console.log(records);
 	numTrials = records.length - 1;
 	for (var i = 1; i <= numTrials; i++) {
-		var cells = records[i].split("\r\n");
+		var cells = records[i].split(",");
 		var menuType = cells[0].trim();
 		var menuDepth = cells[1].trim();
 		var menuBreadth = cells[2].trim();
