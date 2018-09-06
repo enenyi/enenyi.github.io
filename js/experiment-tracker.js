@@ -16,8 +16,9 @@ class ExperimentTracker {
 		this.endTime = null;
 		this.completionTime = null;
 		this.errorRate = null;
-		this.previousCompletionTime = null;
-		this.improvementRate = null;
+		this.redoTries = 0;
+		this.totalTries = 0;
+		this.redoRate = null;
 	}
 
 	resetTimers(){
@@ -35,35 +36,38 @@ class ExperimentTracker {
 	}
 
 	stopTimer() {
-
-		this.endTime = Date.now();
-		this.completionTime = (this.endTime - this.startTime) / 1000.0;
-		if(this.selectedItem == this.targetItem) {
-			if(this.trial % 3 == 1) {
-				this.improvementRate = 0;
-			}
-			else {
-				this.improvementRate = ((this.previousCompletionTime - this.completionTime) / this.previousCompletionTime) * 100.0;
-			}
-			this.previousCompletionTime = this.completionTime;
-			this.errorRate = 1 - (1 / this.attempt) * 100.0;
-		}
-		else {
-			this.improvementRate = 0;
+		if(this.selectedItem == null) {
+			this.totalTries++;
+			this.redoTries++;
 			this.errorRate = "N.A.";
 		}
-		this.trials.push([this.trial, this.attempt, this.menuType, this.menuDepth, this.menuBreadth, this.targetItem, this.selectedItem, this.completionTime, this.errorRate, this.improvementRate])
+		else {
+			if(this.selectedItem == this.targetItem) {
+				this.errorRate = (1 - (1 / this.attempt)) * 100.0;
+			}
+			else {
+				this.errorRate = "N.A.";
+			}
+		}
+		this.endTime = Date.now();
+		this.completionTime = (this.endTime - this.startTime) / 1000.0;
+		this.redoRate = (this.redoTries / this.totalTries) * 100.0;
+		this.trials.push([this.trial, this.attempt, this.menuType, this.menuDepth, this.menuBreadth, this.targetItem, this.selectedItem, this.completionTime, this.errorRate, this.redoRate])
 		this.resetTimers();
 		this.attempt++;
+	}
 
+	incrementTotalTries() {
+		this.totalTries += 1;
 	}
 
 	newTrial() {
 		this.attempt = 1;
+		this.totalTries++;
 	}
 
 	toCsv() {
-		var csvFile = "Trial,Attempt,Menu Type,Menu Depth,Menu Breadth,Target Item,Selected Item,Completion Time,Error Rate,Improvement Rate\n";
+		var csvFile = "Trial,Attempt,Menu Type,Menu Depth,Menu Breadth,Target Item,Selected Item,Completion Time,Error Rate,Redo Rate(Cumulative)\n";
 		for (var i = 0; i < this.trials.length; i++) {
 			csvFile += this.trials[i].join(',');
 			csvFile += "\n";
