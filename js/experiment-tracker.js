@@ -57,8 +57,8 @@ class ExperimentTracker {
 		this.attempt++;
 	}
 
-	incrementTotalTries() {
-		this.totalTries += 1;
+	setSwitchOverPoint() {
+		this.totalTries = 0;
 	}
 
 	newTrial() {

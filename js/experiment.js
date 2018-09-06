@@ -18,6 +18,7 @@ var trialsFile = "";
 var numTrials = 0;
 var orderNumber = 0;
 var currentTrial = 1;
+var switchOverPoint = 0;
 var markingMenuL1 = [];
 var markingMenuL2 = [];
 var markingMenuL3 = [];
@@ -50,6 +51,7 @@ function initExperiment() {
 
 	var records = data.split("\n");
 	numTrials = records.length - 1;
+	switchOverPoint = (numTrials / 2) + 1;
 	for (var i = 1; i <= numTrials; i++) {
 		var cells = records[i].split(",");
 		var menuType = cells[0].trim();
@@ -120,6 +122,10 @@ function nextTrial() {
 		document.getElementById("menuBreadth").innerHTML = menuBreadth;
 		document.getElementById("targetItem").innerHTML = targetItem;
 		document.getElementById("selectedItem").innerHTML = "&nbsp;";
+
+		if (currentTrial == switchOverPoint) {
+			tracker.setSwitchOverPoint();
+		}
 
 		tracker.newTrial();
 		tracker.trial = currentTrial;
