@@ -6,7 +6,8 @@ class ExperimentTracker {
 		this.preExperimentQuestions = [];
 		this.consent = false;
 		this.postExperimentQuestions = [];
-		
+		this.participantID = "";
+
 		this.trials = [];
 		this.attempt = 0;
 		this.trial = null;
@@ -71,7 +72,11 @@ class ExperimentTracker {
 	}
 
 	toCsv() {
-		var csvFile = "Trial,Attempt,Menu Type,Menu Depth,Menu Breadth,Target Item,Selected Item,Completion Time,Error Rate,Redo Rate(Cumulative)\n";
+		var csvFile = "ParticipantID,Consent,PreExperimentQuestion1,PreExperimentQuestion2,PreExperimentQuestion3,PostExperimentQn1,PostExperimentQn2,PostExperimentQn3,PostExperimentQn4,PostExperimentQn5\n";
+		var participantSurveyData = this.participantID + "," + this.consent + "," + this.preExperimentQuestions[0] + "," + this.preExperimentQuestions[1] + "," + this.preExperimentQuestions[2] + "," + this.postExperimentQuestions[0] + "," + this.postExperimentQuestions[1]
+			+ "," + this.postExperimentQuestions[2] + "," + this.postExperimentQuestions[3] + "," + this.postExperimentQuestions[4] + "," + "\n";
+		var experimentHeader = "Trial,Attempt,Menu Type,Menu Depth,Menu Breadth,Target Item,Selected Item,Completion Time,Error Rate,Redo Rate(Cumulative)\n";
+		csvFile = csvFile + participantSurveyData + "\n" + experimentHeader;
 		for (var i = 0; i < this.trials.length; i++) {
 			csvFile += this.trials[i].join(',');
 			csvFile += "\n";
@@ -85,5 +90,31 @@ class ExperimentTracker {
 		hiddenLink.click();
 	}
 
+	generateParticipantID() {
+  		var text = "";
+  		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  		for (var i = 0; i < 24; i++) {
+    		text += possible.charAt(Math.floor(Math.random() * possible.length));
+		}
+
+  		return text;
+	}
+
+	recordPreExperimentSurvey(preQn1,preQn2,preQn3,consent) {
+		this.preExperimentQuestions.push(preQn1);
+		this.preExperimentQuestions.push(preQn2);
+		this.preExperimentQuestions.push(preQn3);
+		this.consent = consent;
+		this.participantID = this.generateParticipantID();
+	}
+
+	recordPostExperimentSurvey(postQn1,postQn2,postQn3,postQn4,postQn5) {
+		this.postExperimentQuestions.push(postQn1);
+		this.postExperimentQuestions.push(postQn2);
+		this.postExperimentQuestions.push(postQn3);
+		this.postExperimentQuestions.push(postQn4);
+		this.postExperimentQuestions.push(postQn5);
+	}
 
 }

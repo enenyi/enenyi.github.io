@@ -1,15 +1,15 @@
 'use strict';
 
 // Location of data files
-const menuL1B2File = "./data/menu_depth_1_breadth_2.csv"
-const menuL2B2File = "./data/menu_depth_2_breadth_2.csv"
-const menuL3B2File = "./data/menu_depth_3_breadth_2.csv"
-const menuL1B3File = "./data/menu_depth_1_breadth_3.csv"
-const menuL2B3File = "./data/menu_depth_2_breadth_3.csv"
-const menuL3B3File = "./data/menu_depth_3_breadth_3.csv"
-const menuL1B4File = "./data/menu_depth_1_breadth_4.csv"
-const menuL2B4File = "./data/menu_depth_2_breadth_4.csv"
-const menuL3B4File = "./data/menu_depth_3_breadth_4.csv"
+const menuL1B2File = "data/menu_depth_1_breadth_2.csv"
+const menuL2B2File = "data/menu_depth_2_breadth_2.csv"
+const menuL3B2File = "data/menu_depth_3_breadth_2.csv"
+const menuL1B3File = "data/menu_depth_1_breadth_3.csv"
+const menuL2B3File = "data/menu_depth_2_breadth_3.csv"
+const menuL3B3File = "data/menu_depth_3_breadth_3.csv"
+const menuL1B4File = "data/menu_depth_1_breadth_4.csv"
+const menuL2B4File = "data/menu_depth_2_breadth_4.csv"
+const menuL3B4File = "data/menu_depth_3_breadth_4.csv"
 
 // Global variables
 var menu;
@@ -46,7 +46,7 @@ function initExperiment() {
 
 	// Get Trails
 	orderNumber = parseInt(Math.floor(Math.random() * 6) + 1);
-	trialsFile = "./data/experimentsOrder" + String(orderNumber) + ".csv";
+	trialsFile = "data/experimentsOrder" + String(orderNumber) + ".csv";
 	var data = getData(trialsFile);
 
 	var records = data.split("\n");
@@ -169,7 +169,7 @@ function nextTrial() {
 
 	    var nextButton = document.getElementById("nextButton");
 	    nextButton.innerHTML = "Done";
-		tracker.toCsv();
+		$('#postExperimentQuestionsModal').modal({backdrop: "static"});
 	}
 }
 
@@ -400,4 +400,44 @@ function formatRadialMenuData(data) {
 		'_children': menuItemsList
 	};
 
+}
+
+$(window).on('load',function(){
+    $('#preExperimentQuestionsModal').modal({backdrop: "static"});
+	$('#consentFormCheckbox').prop('checked', false);
+	$('#preExperimentSubmitButton').addClass("disabled");
+});
+
+$('#consentFormCheckbox').on('change', function() {
+	if($('#consentFormCheckbox').prop('checked') == true){
+		$('#preExperimentSubmitButton').removeClass("disabled");
+	}
+	else {
+		$('#preExperimentSubmitButton').addClass("disabled");
+	}
+});
+
+function processPreExperimentSurvey() {
+	var preQn1 = $('input[name="preQn1"]:checked').val();
+	var preQn2 = $('input[name="preQn2"]:checked').val();
+	var preQn3 = $('input[name="preQn3"]:checked').val();
+	var consent = $('#consentFormCheckbox').prop('checked');
+	tracker.recordPreExperimentSurvey(preQn1,preQn2,preQn3,consent);
+	$('#preExperimentQuestionsModal').modal('hide');
+	$('#instructionsModal').modal({backdrop: "static"});
+}
+
+function startExperiment() {
+	$('#instructionsModal').modal('hide');
+	initExperiment();
+}
+
+function processPostExperimentSurvey() {
+	var postQn1 = $('input[name="postQn1"]:checked').val();
+	var postQn2 = $('input[name="postQn2"]:checked').val();
+	var postQn3 = $('input[name="postQn3"]:checked').val();
+	var postQn4 = $('input[name="postQn4"]:checked').val();
+	var postQn5 = $('input[name="postQn4"]:checked').val();
+	tracker.recordPostExperimentSurvey(postQn1,postQn2,postQn3,postQn4,postQn5);
+	tracker.toCsv();
 }

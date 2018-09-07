@@ -506,7 +506,7 @@ input[type="button"].btn-block {
 }
 
 /*! Custom CSS*/
-html,body { height:100%; width: 95vw }
+html,body { height:100%; width: 95vw;}
 
 #state-container{
   height:8%;
@@ -547,10 +547,10 @@ html,body { height:100%; width: 95vw }
 	border-color:#f4ad42;
     border-size: 1px;
     border-style: solid;
-    height:92%;;
+    height:85%;
     width:95%;
     position:absolute;
-      
+
 }
 
   #radialmenu {
@@ -575,7 +575,7 @@ html,body { height:100%; width: 95vw }
     .curved, .radial {
         fill: #fff;
     }
- 
+
 .btn:focus,
 .btn:active:focus,
 .btn.active:focus,

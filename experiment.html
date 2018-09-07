@@ -16,19 +16,8 @@
 	<!-- Experiment Stylesheet -->
 	<link href="./css/experiment.css" rel="stylesheet">
 
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   </head>
-  <body onload="initExperiment()" >
-    <div class="modal fade bd-example-modal-lg" role="dialog" aria-labelledby="preExperimentQuestionsModal" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                  ...
-            </div>
-        </div>
-    </div>
+  <body>
 
 	<!-- State Div -->
     <div class="row" id="state-container">
@@ -67,12 +56,189 @@
 	</div>
 
 
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="preExperimentQuestionsModal" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title" id="preExperimentQuestionsModalLabel">Pre-Experiment Survey</h2>
+              </div>
+              <div class="modal-body">
+                  <br>
+                  <h4>First, tell me a little more about yourself.</h4>
+                  <br>
+                  <form>
+                      <div class="form-group">
+                          <h6>1. Your Age: </h6>
+                          <div class="row">
+                              <div class="col-md-3 radio">
+                                  <label><input type="radio" value="11 to 20 years old" name="preQn1"> 11 to 20 years old </label>
+                              </div>
+                              <div class="col-md-3 radio">
+                                  <label><input type="radio" value="21 to 30 years old" name="preQn1"> 21 to 30 years old </label>
+                              </div>
+                              <div class="col-md-3 radio">
+                                  <label><input type="radio" value="31 to 40 years old" name="preQn1"> 31 to 40 years old </label>
+                              </div>
+                              <div class="col-md-3 radio">
+                                  <label><input type="radio" value="41 to 50 years old" name="preQn1"> 41 to 50 years old </label>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <h6>2. How experienced are you at computers? </h6>
+                          <div class="row">
+                              <div class="col-md-3 radio">
+                                  <label><input type="radio" value="No Experience" name="preQn2"> No Experience </label>
+                              </div>
+                              <div class="col-md-3 radio">
+                                  <label><input type="radio" value="Little Experience" name="preQn2"> Little Experience </label>
+                              </div>
+                              <div class="col-md-3 radio">
+                                  <label><input type="radio" value="Some Experience" name="preQn2"> Some Experience </label>
+                              </div>
+                              <div class="col-md-3 radio">
+                                  <label><input type="radio" value="Highly Experienced" name="preQn2"> Highly Experienced </label>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <h6>3. Rate your experience with using menus in software applications.</h6>
+                          <div class="row">
+                              <div class="col-md-4 radio">
+                                  <label><input type="radio" value="Hard to navigate" name="preQn3"> Hard to navigate</label>
+                              </div>
+                              <div class="col-md-4 radio">
+                                  <label><input type="radio" value="Depends on application" name="preQn3"> Depends on application</label>
+                              </div>
+                              <div class="col-md-4 radio">
+                                  <label><input type="radio" value="Easy to navigate" name="preQn3"> Easy to navigate</label>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <h4>Consent Form</h4>
+                          <label><input type="checkbox" id="consentFormCheckbox" value=""> By participating in the experiment, I consent to the use of my results as experiment data.</label>
+                      </div>
+                      <button type="button" class="btn btn-primary" id="preExperimentSubmitButton" onclick="processPreExperimentSurvey()">Submit</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="instructionsModal" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title" id="preExperimentQuestionsModalLabel">Instructions</h2>
+              </div>
+              <div class="modal-body">
+                  <p>For this experiment, you will be shown 2 types of menu: Marking Menu and Radial Menu. </p>
+                  <p>There will be a total of 54 trials, 27 for each menu type. For each trial, a target item is given. Use the menu to select the target item. When you have made your selection, click on the ‘Next’ button to proceed to the next trial.</p>
+                  <p>For the marking menu:
+                      <ol>
+                          <li>Right click to bring up the menu</li>
+                          <li>Swipe (while holding down the right mouse click) to make your selection</li>
+                          <li>Release the right mouse click to confirm your selection</li>
+                      </ol>
+                  </p>
+                  <p>For the radial menu:
+                      <ol>
+                          <li>Right click to bring up the menu</li>
+                          <li>Move the cursor to the selection</li>
+                          <li>Left click to confirm your selection</li>
+                      </ol>
+                  </p>
+                  <p>On completion of experiment, there will be an exit survey followed by a downloadable copy of your results</p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" onclick="startExperiment()">Begin Experiment</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="postExperimentQuestionsModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="postExperimentQuestionsModalLabel">Post-Experiment Survey</h2>
+            </div>
+            <div class="modal-body">
+                <br>
+                <h4>Now that you have some experience using both types of menus:</h4>
+                <br>
+                <form>
+                    <div class="form-group">
+                        <h6>1. Which menu type is easier to understand? </h6>
+                        <div class="row">
+                            <div class="col-md-6 radio">
+                                <label><input type="radio" value="Marking Menu" name="postQn1"> Marking Menu</label>
+                            </div>
+                            <div class="col-md-6 radio">
+                                <label><input type="radio" value="Radial Menu" name="postQn1"> Radial Menu</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h6>2. Overall, which menu type is easier to navigate?</h6>
+                        <div class="row">
+                            <div class="col-md-6 radio">
+                                <label><input type="radio" value="Marking Menu" name="postQn2"> Marking Menu</label>
+                            </div>
+                            <div class="col-md-6 radio">
+                                <label><input type="radio" value="Radial Menu" name="postQn2"> Radial Menu</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h6>3. Which menu type is easier to navigate when there are 2 options in the menu?</h6>
+                        <div class="row">
+                            <div class="col-md-6 radio">
+                                <label><input type="radio" value="Marking Menu" name="postQn3"> Marking Menu</label>
+                            </div>
+                            <div class="col-md-6 radio">
+                                <label><input type="radio" value="Radial Menu" name="postQn3"> Radial Menu</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h6>4. Which menu type is easier to navigate when there are 4 options in the menu?</h6>
+                        <div class="row">
+                            <div class="col-md-6 radio">
+                                <label><input type="radio" value="Marking Menu" name="postQn4"> Marking Menu</label>
+                            </div>
+                            <div class="col-md-6 radio">
+                                <label><input type="radio" value="Radial Menu" name="postQn4"> Radial Menu</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h6>5. Which menu type is easier to navigate when the item is 3 levels deep (e.g. Animals -> Fish -> Shark)?</h6>
+                        <div class="row">
+                            <div class="col-md-6 radio">
+                                <label><input type="radio" value="Marking Menu" name="postQn5"> Marking Menu</label>
+                            </div>
+                            <div class="col-md-6 radio">
+                                <label><input type="radio" value="Radial Menu" name="postQn5"> Radial Menu</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="preExperimentSubmitButton" onclick="processPostExperimentSurvey()">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
   </body>
 
 
     <!-- Marking Menu Scripts -->
     <script src="./js/external/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="./js/external/rxjs.umd.js"></script>
   	<script src="./js/external/marking-menu.js"></script>
 
