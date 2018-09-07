@@ -3,6 +3,10 @@ class ExperimentTracker {
 
 
 	constructor() {
+		this.preExperimentQuestions = [];
+		this.consent = false;
+		this.postExperimentQuestions = [];
+		
 		this.trials = [];
 		this.attempt = 0;
 		this.trial = null;
