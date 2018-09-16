@@ -44,8 +44,7 @@ function getData(relativePath) {
 // Loads the CSV data files on page load and store it to global variables
 function initExperiment() {
 
-	// Get Trails
-	orderNumber = parseInt(Math.floor(Math.random() * 6) + 1);
+	// Get Trials
 	trialsFile = "data/experimentsOrder" + String(orderNumber) + ".csv";
 	var data = getData(trialsFile);
 
@@ -429,6 +428,13 @@ function processPreExperimentSurvey() {
 }
 
 function startExperiment() {
+	var userOrderNumber = $('#orderNumberInput').val();
+	if (parseInt(userOrderNumber) != 'NaN' && parseInt(userOrderNumber) > 0 && parseInt(userOrderNumber) < 7) {
+		orderNumber = parseInt(userOrderNumber);
+	}
+	else {
+		orderNumber = parseInt(Math.floor(Math.random() * 6) + 1);
+	}
 	$('#instructionsModal').modal('hide');
 	initExperiment();
 }
